@@ -388,8 +388,15 @@ if all_data:
         col1, col2 = st.columns([1, 2])
         with col1:
             st.markdown("#### ⚙️ Local LLM Connection")
-            llm_url = st.text_input("Ollama API URL / EndPoint", value="http://localhost:11434")
+            # Defaulting to your PC's Network IP so team members don't have to type it
+            llm_url = st.text_input("Ollama API URL / EndPoint", value="http://192.168.68.112:11434")
             llm_model = st.selectbox("Select Target Model", ["qwen", "deepseek-coder", "llama3"])
+            
+            if st.button("Test Agent Connection"):
+                if create_gh_issue("🔄 Connection Test", f"Triggered by {datetime.now()}. If you see this, the GitHub Token is working!"):
+                    st.success("Test Issue created on GitHub! If your local optimizer is running, it should pick this up in ~5 mins.")
+                else:
+                    st.error("Failed to create Test Issue. Please check your GITHUB_TOKEN in Streamlit Secrets.")
             
             st.markdown("#### 🖼️ Template Injection")
             template_upload = st.file_uploader("Upload Target Plot Style (PNG/JPG/XLSX)", type=["png", "jpg", "jpeg", "xlsx"])
