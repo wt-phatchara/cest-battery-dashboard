@@ -5,33 +5,32 @@ import shutil
 import uuid
 import tempfile
 import logging
-import ctypes
+# ctypes is only for Windows short-path support
 
 # Trace which file is being loaded
 print(f"!!! VERSION 8.0 !!! Loading logic_parsing from: {__file__}")
 
 # --- MONKEY PATCH NEWARENDA ---
-# The NewareNDA library (v1.3.1) is missing the '3000' instrument range in its multiplier_dict.
-# When it encounters this range in newer .ndax files, it throws a KeyError, crashes, and leaves 
-# internal temp files locked, causing cascading WinError 32 and WinError 267 permissions errors.
+# Only attempt if the dicts and multiplier_dict exist to prevent startup crashes.
 try:
-    if 3000 not in NewareNDA.dicts.multiplier_dict:
-        NewareNDA.dicts.multiplier_dict[3000] = 1e-2
-        print(f"!!! DEBUG v6.0 !!! Successfully monkey-patched NewareNDA.dicts.multiplier_dict with key 3000.")
+    if hasattr(NewareNDA, 'dicts') and hasattr(NewareNDA.dicts, 'multiplier_dict'):
+        if 3000 not in NewareNDA.dicts.multiplier_dict:
+            NewareNDA.dicts.multiplier_dict[3000] = 1e-2
+            print("!!! DEBUG !!! Successfully monkey-patched NewareNDA 3000 multiplier.")
 except Exception as e:
-    print(f"!!! DEBUG v6.0 !!! Warning: Could not monkey-patch NewareNDA: {e}")
+    print(f"!!! DEBUG !!! Patch warning: {e}")
 # ------------------------------
 
-# GLOBAL OVERRIDE: Use a local temp directory relative to the project
-# This fixes extraction issues while remaining cross-platform (Linux/Windows)
-SAFE_BASE = os.path.abspath(os.path.join(os.getcwd(), "data_temp"))
-try:
-    os.makedirs(SAFE_BASE, exist_ok=True)
-    os.environ['TEMP'] = SAFE_BASE
-    os.environ['TMP'] = SAFE_BASE
-    tempfile.tempdir = SAFE_BASE
-except Exception as e:
-    print(f"!!! DEBUG !!! Warning: Could not set custom temp dir: {e}")
+# GLOBAL OVERRIDE: Skip environment overrides on Linux (Streamlit Cloud handles /tmp better)
+if os.name == 'nt':
+    SAFE_BASE = "C:\\ndax_temp" # Use root-dir on Windows to avoid space issues
+    try:
+        os.makedirs(SAFE_BASE, exist_ok=True)
+        os.environ['TEMP'] = SAFE_BASE
+        os.environ['TMP'] = SAFE_BASE
+        tempfile.tempdir = SAFE_BASE
+    except Exception as e:
+        print(f"!!! DEBUG !!! Windows Temp Override Warning: {e}")
 
 def get_short_path_name(long_name: str) -> str:
     """
@@ -39,12 +38,13 @@ def get_short_path_name(long_name: str) -> str:
     """
     if os.name != 'nt':
         return long_name
+    import ctypes
     try:
         output_buf_size = 0
         max_tries = 100
         for _ in range(max_tries):
             output_buf = ctypes.create_unicode_buffer(output_buf_size)
-            needed = ctypes.windll.kernel32.GetShortPathNameW(long_name, output_buf, output_buf_size)  # pyre-ignore
+            needed = ctypes.windll.kernel32.GetShortPathNameW(long_name, output_buf, output_buf_size) # type: ignore
             if needed == 0:
                 return long_name
             if output_buf_size >= needed:
