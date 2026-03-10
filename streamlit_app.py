@@ -17,15 +17,21 @@ GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN", "")  # Add this to Streamlit Cloud
 
 def create_gh_issue(title, body):
     if not GITHUB_TOKEN:
-        return False
+        return False, "GITHUB_TOKEN is missing from Secrets."
     url = f"https://api.github.com/repos/{GITHUB_REPO}/issues"
     headers = {
-        "Authorization": f"token {GITHUB_TOKEN}",
+        "Authorization": f"Bearer {GITHUB_TOKEN}",
         "Accept": "application/vnd.github.v3+json"
     }
     data = {"title": title, "body": body}
-    response = requests.post(url, headers=headers, json=data)
-    return response.status_code == 201
+    try:
+        response = requests.post(url, headers=headers, json=data)
+        if response.status_code == 201:
+            return True, "Success"
+        else:
+            return False, f"GitHub Error {response.status_code}: {response.text}"
+    except Exception as e:
+        return False, f"Connection Error: {str(e)}"
 
 # --- UI Configuration & Styling ---
 st.set_page_config(page_title="Battery Performance Auto-Plotter", layout="wide")
@@ -393,10 +399,11 @@ if all_data:
             llm_model = st.selectbox("Select Target Model", ["qwen", "deepseek-coder", "llama3"])
             
             if st.button("Test Agent Connection"):
-                if create_gh_issue("🔄 Connection Test", f"Triggered by {datetime.now()}. If you see this, the GitHub Token is working!"):
+                success, msg = create_gh_issue("🔄 Connection Test", f"Triggered by {datetime.now()}. If you see this, the GitHub Token is working!")
+                if success:
                     st.success("Test Issue created on GitHub! If your local optimizer is running, it should pick this up in ~5 mins.")
                 else:
-                    st.error("Failed to create Test Issue. Please check your GITHUB_TOKEN in Streamlit Secrets.")
+                    st.error(f"Failed to create Test Issue: {msg}")
             
             st.markdown("#### 🖼️ Template Injection")
             template_upload = st.file_uploader("Upload Target Plot Style (PNG/JPG/XLSX)", type=["png", "jpg", "jpeg", "xlsx"])
@@ -474,7 +481,7 @@ if st.button("Submit Feedback"):
                 f.write(log_entry)
         
         # 2. Cloud Development (GitHub Issue)
-        success = create_gh_issue(f"Team Feedback: {datetime.now().strftime('%Y-%m-%d %H:%M')}", user_feedback)
+        success, msg = create_gh_issue(f"Team Feedback: {datetime.now().strftime('%Y-%m-%d %H:%M')}", user_feedback)
         
         if success:
             st.success("Feedback pushed to GitHub! The Self-Development Agent will review this shortly.")
@@ -482,5 +489,7 @@ if st.button("Submit Feedback"):
             st.success("Feedback logged locally!")
             if not GITHUB_TOKEN:
                 st.info("💡 Tip: Add 'GITHUB_TOKEN' to Streamlit Secrets to enable automatic Agent-Fixing.")
+            else:
+                st.warning(f"Note: GitHub synchronization failed ({msg}). Check your GITHUB_TOKEN permissions.")
     else:
         st.warning("Please enter some feedback before submitting.")
