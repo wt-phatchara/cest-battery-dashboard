@@ -1,4 +1,6 @@
 import streamlit as st  # pyre-ignore
+st.set_page_config(page_title="Battery Performance Auto-Plotter", layout="wide")
+
 import pandas as pd  # pyre-ignore
 import numpy as np  # pyre-ignore
 import plotly.express as px  # pyre-ignore
@@ -7,9 +9,15 @@ import os
 import traceback
 import uuid
 from datetime import datetime
-from logic_parsing import process_nda_file, clean_data  # pyre-ignore
-from logic_electrochem import calculate_dqdv, calculate_metrics, map_crate  # pyre-ignore
 import requests
+
+# Try-except imports to catch boot-time errors
+try:
+    from logic_parsing import process_nda_file, clean_data  # pyre-ignore
+    from logic_electrochem import calculate_dqdv, calculate_metrics, map_crate  # pyre-ignore
+except Exception as e:
+    st.error(f"Boot Error: Core logic files missing or broken. {e}")
+    st.stop()
 
 # --- GitHub Integration (Phase 7: Self-Development Loop) ---
 GITHUB_REPO = "wt-phatchara/cest-battery-dashboard"
@@ -34,7 +42,6 @@ def create_gh_issue(title, body):
         return False, f"Connection Error: {str(e)}"
 
 # --- UI Configuration & Styling ---
-st.set_page_config(page_title="Battery Performance Auto-Plotter", layout="wide")
 st.title("⚡ Scalable Battery Performance Auto-Plotter")
 st.markdown("---")
 
