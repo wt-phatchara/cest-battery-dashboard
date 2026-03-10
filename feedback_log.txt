@@ -1,0 +1,1442 @@
+[2026-03-10 04:32:45.693951] ERROR: 240030-2-8-2818574963.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 100, in read_ndax
+    data_df = read_ndc(data_file)
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 232, in read_ndc
+    return f(mm)
+           ^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 304, in _read_ndc_5_filetype_1
+    output.append(_bytes_to_list_ndc(i[0]))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 691, in _bytes_to_list_ndc
+    multiplier = multiplier_dict[Range]
+                 ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\shutil.py", line 619, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpc4s7ii52\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 878, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpc4s7ii52\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JA\Documents\New folder\logic_parsing.py", line 11, in process_nda_file
+    df = NewareNDA.read(file_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 51, in read
+    return read_ndax(file, software_cycle_number, cycle_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 37, in read_ndax
+    with tempfile.TemporaryDirectory() as tmpdir:
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 904, in __exit__
+    self.cleanup()
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 908, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 621, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 881, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 602, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\shutil.py", line 599, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+         ^^^^^^^^^^^^^^^^
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpc4s7ii52\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JA\Documents\New folder\app.py", line 51, in <module>
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\Documents\New folder\logic_parsing.py", line 15, in process_nda_file
+    raise Exception(f"Failed to parse {file_path}: {e}")
+Exception: Failed to parse data_temp\240030-2-8-2818574963.ndax: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpc4s7ii52\\data.ndc'
+
+[2026-03-10 04:37:18.059185] ERROR: 240030-2-8-2818574963.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 100, in read_ndax
+    data_df = read_ndc(data_file)
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 232, in read_ndc
+    return f(mm)
+           ^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 304, in _read_ndc_5_filetype_1
+    output.append(_bytes_to_list_ndc(i[0]))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 691, in _bytes_to_list_ndc
+    multiplier = multiplier_dict[Range]
+                 ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\shutil.py", line 619, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpim6u7c0f\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 878, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpim6u7c0f\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JA\Documents\New folder\logic_parsing.py", line 16, in process_nda_file
+    df = NewareNDA.read(abs_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 51, in read
+    return read_ndax(file, software_cycle_number, cycle_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 37, in read_ndax
+    with tempfile.TemporaryDirectory() as tmpdir:
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 904, in __exit__
+    self.cleanup()
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 908, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 621, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 881, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 602, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\shutil.py", line 599, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+         ^^^^^^^^^^^^^^^^
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpim6u7c0f\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JA\Documents\New folder\app.py", line 51, in <module>
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\Documents\New folder\logic_parsing.py", line 20, in process_nda_file
+    raise Exception(f"Failed to parse {file_path}: {e}")
+Exception: Failed to parse C:\Users\JA\Documents\New folder\data_temp\240030-2-8-2818574963.ndax: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpim6u7c0f\\data.ndc'
+
+[2026-03-10 04:39:49.202434] ERROR: 240030-2-8-2818574963.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\Documents\New folder\logic_parsing.py", line 42, in process_nda_file
+    df = NewareNDA.read(short_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 54, in read
+    raise TypeError("File type not supported!")
+TypeError: File type not supported!
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JA\Documents\New folder\app.py", line 51, in <module>
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\Documents\New folder\logic_parsing.py", line 46, in process_nda_file
+    raise Exception(f"Failed to parse {file_path}: {e}")
+Exception: Failed to parse C:\Users\JA\Documents\New folder\data_temp\240030-2-8-2818574963.ndax: File type not supported!
+
+[2026-03-10 04:44:16.343556] ERROR: 240030-2-8-2818574963.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 100, in read_ndax
+    data_df = read_ndc(data_file)
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 232, in read_ndc
+    return f(mm)
+           ^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 304, in _read_ndc_5_filetype_1
+    output.append(_bytes_to_list_ndc(i[0]))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 691, in _bytes_to_list_ndc
+    multiplier = multiplier_dict[Range]
+                 ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\shutil.py", line 619, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpkw481931\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 878, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpkw481931\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JA\Documents\New folder\logic_parsing.py", line 25, in process_nda_file
+    df = NewareNDA.read(simple_tmp_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 51, in read
+    return read_ndax(file, software_cycle_number, cycle_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 37, in read_ndax
+    with tempfile.TemporaryDirectory() as tmpdir:
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 904, in __exit__
+    self.cleanup()
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 908, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 621, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 881, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 602, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\shutil.py", line 599, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+         ^^^^^^^^^^^^^^^^
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpkw481931\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JA\Documents\New folder\logic_parsing.py", line 29, in process_nda_file
+    raise Exception(f"Failed to parse {cell_label}: {e}")
+Exception: Failed to parse 240030-2-8-2818574963: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpkw481931\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JA\Documents\New folder\app.py", line 51, in <module>
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\Documents\New folder\logic_parsing.py", line 33, in process_nda_file
+    os.remove(simple_tmp_path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\Documents\\New folder\\data_temp\\tmp_process.ndax'
+
+[2026-03-10 04:47:12.738091] ERROR: 240030-2-8-2818574963.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 100, in read_ndax
+    data_df = read_ndc(data_file)
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 232, in read_ndc
+    return f(mm)
+           ^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 304, in _read_ndc_5_filetype_1
+    output.append(_bytes_to_list_ndc(i[0]))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 691, in _bytes_to_list_ndc
+    multiplier = multiplier_dict[Range]
+                 ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\shutil.py", line 619, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmp6l7iz3eb\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 878, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmp6l7iz3eb\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JA\Documents\New folder\logic_parsing.py", line 26, in process_nda_file
+    df = NewareNDA.read(simple_tmp_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 51, in read
+    return read_ndax(file, software_cycle_number, cycle_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 37, in read_ndax
+    with tempfile.TemporaryDirectory() as tmpdir:
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 904, in __exit__
+    self.cleanup()
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 908, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 621, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 881, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 602, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\shutil.py", line 599, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+         ^^^^^^^^^^^^^^^^
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmp6l7iz3eb\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JA\Documents\New folder\app.py", line 51, in <module>
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\Documents\New folder\logic_parsing.py", line 30, in process_nda_file
+    raise Exception(f"Failed to parse {cell_label}: {e}")
+Exception: Failed to parse 240030-2-8-2818574963: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmp6l7iz3eb\\data.ndc'
+
+[2026-03-10 05:07:32.463232] ERROR: 240030-2-8-2818574963.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 100, in read_ndax
+    data_df = read_ndc(data_file)
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 232, in read_ndc
+    return f(mm)
+           ^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 304, in _read_ndc_5_filetype_1
+    output.append(_bytes_to_list_ndc(i[0]))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 691, in _bytes_to_list_ndc
+    multiplier = multiplier_dict[Range]
+                 ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\shutil.py", line 619, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpviy4rhnb\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 878, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpviy4rhnb\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JA\Documents\New folder\logic_parsing.py", line 35, in process_nda_file
+    df = NewareNDA.read(safe_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 51, in read
+    return read_ndax(file, software_cycle_number, cycle_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 37, in read_ndax
+    with tempfile.TemporaryDirectory() as tmpdir:
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 904, in __exit__
+    self.cleanup()
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 908, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 621, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 881, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 602, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\shutil.py", line 599, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+         ^^^^^^^^^^^^^^^^
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpviy4rhnb\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\JA\Documents\New folder\app.py", line 74, in <module>
+    df = cached_process_file(uploaded_file.getvalue(), uploaded_file.name, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 281, in __call__
+    return self._get_or_create_cached_value(args, kwargs, spinner_message)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 326, in _get_or_create_cached_value
+    return self._handle_cache_miss(cache, value_key, func_args, func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 385, in _handle_cache_miss
+    computed_value = self._info.func(*func_args, **func_kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\Documents\New folder\app.py", line 43, in cached_process_file
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\Documents\New folder\logic_parsing.py", line 39, in process_nda_file
+    raise Exception(f"Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\\data\\'.")
+Exception: Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\data\'.
+
+[2026-03-10 14:40:02.796506] ERROR: 240030-2-8-2818574963.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 100, in read_ndax
+    data_df = read_ndc(data_file)
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 232, in read_ndc
+    return f(mm)
+           ^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 304, in _read_ndc_5_filetype_1
+    output.append(_bytes_to_list_ndc(i[0]))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 691, in _bytes_to_list_ndc
+    multiplier = multiplier_dict[Range]
+                 ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\shutil.py", line 619, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmp2ymmyje4\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 878, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmp2ymmyje4\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 44, in process_nda_file
+    df = NewareNDA.read(safe_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 51, in read
+    return read_ndax(file, software_cycle_number, cycle_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 37, in read_ndax
+    with tempfile.TemporaryDirectory() as tmpdir:
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 904, in __exit__
+    self.cleanup()
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 908, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 621, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 881, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 602, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\shutil.py", line 599, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+         ^^^^^^^^^^^^^^^^
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmp2ymmyje4\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\app.py", line 74, in <module>
+    df = cached_process_file(uploaded_file.getvalue(), uploaded_file.name, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 281, in __call__
+    return self._get_or_create_cached_value(args, kwargs, spinner_message)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 326, in _get_or_create_cached_value
+    return self._handle_cache_miss(cache, value_key, func_args, func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 385, in _handle_cache_miss
+    computed_value = self._info.func(*func_args, **func_kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\app.py", line 43, in cached_process_file
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 48, in process_nda_file
+    raise Exception(f"Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\\data\\'.")
+Exception: Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\data\'.
+
+[2026-03-10 14:41:50.258018] ERROR: 240030-2-8-2818574963.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 100, in read_ndax
+    data_df = read_ndc(data_file)
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 232, in read_ndc
+    return f(mm)
+           ^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 304, in _read_ndc_5_filetype_1
+    output.append(_bytes_to_list_ndc(i[0]))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 691, in _bytes_to_list_ndc
+    multiplier = multiplier_dict[Range]
+                 ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\shutil.py", line 619, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpg2t8dt19\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 878, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpg2t8dt19\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 43, in process_nda_file
+    df = NewareNDA.read(safe_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 51, in read
+    return read_ndax(file, software_cycle_number, cycle_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 37, in read_ndax
+    with tempfile.TemporaryDirectory() as tmpdir:
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 904, in __exit__
+    self.cleanup()
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 908, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 621, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 881, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 602, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\shutil.py", line 599, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+         ^^^^^^^^^^^^^^^^
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpg2t8dt19\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\app.py", line 74, in <module>
+    df = cached_process_file(uploaded_file.getvalue(), uploaded_file.name, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 281, in __call__
+    return self._get_or_create_cached_value(args, kwargs, spinner_message)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 326, in _get_or_create_cached_value
+    return self._handle_cache_miss(cache, value_key, func_args, func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 385, in _handle_cache_miss
+    computed_value = self._info.func(*func_args, **func_kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\app.py", line 43, in cached_process_file
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 47, in process_nda_file
+    raise Exception(f"Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\\data\\'.")
+Exception: Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\data\'.
+
+[2026-03-10 14:41:55.881673] ERROR: 240030-2-8-2818574963.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 100, in read_ndax
+    data_df = read_ndc(data_file)
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 232, in read_ndc
+    return f(mm)
+           ^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 304, in _read_ndc_5_filetype_1
+    output.append(_bytes_to_list_ndc(i[0]))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 691, in _bytes_to_list_ndc
+    multiplier = multiplier_dict[Range]
+                 ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\shutil.py", line 619, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmppe1guj77\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 878, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmppe1guj77\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 43, in process_nda_file
+    df = NewareNDA.read(safe_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 51, in read
+    return read_ndax(file, software_cycle_number, cycle_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 37, in read_ndax
+    with tempfile.TemporaryDirectory() as tmpdir:
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 904, in __exit__
+    self.cleanup()
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 908, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 621, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 881, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 602, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\shutil.py", line 599, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+         ^^^^^^^^^^^^^^^^
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmppe1guj77\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\app.py", line 74, in <module>
+    df = cached_process_file(uploaded_file.getvalue(), uploaded_file.name, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 281, in __call__
+    return self._get_or_create_cached_value(args, kwargs, spinner_message)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 326, in _get_or_create_cached_value
+    return self._handle_cache_miss(cache, value_key, func_args, func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 385, in _handle_cache_miss
+    computed_value = self._info.func(*func_args, **func_kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\app.py", line 43, in cached_process_file
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 47, in process_nda_file
+    raise Exception(f"Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\\data\\'.")
+Exception: Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\data\'.
+
+[2026-03-10 14:41:56.536476] ERROR: 240030-2-8-2818574963.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 100, in read_ndax
+    data_df = read_ndc(data_file)
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 232, in read_ndc
+    return f(mm)
+           ^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 304, in _read_ndc_5_filetype_1
+    output.append(_bytes_to_list_ndc(i[0]))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 691, in _bytes_to_list_ndc
+    multiplier = multiplier_dict[Range]
+                 ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\shutil.py", line 619, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpk9_lyn8x\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 878, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpk9_lyn8x\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 43, in process_nda_file
+    df = NewareNDA.read(safe_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 51, in read
+    return read_ndax(file, software_cycle_number, cycle_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 37, in read_ndax
+    with tempfile.TemporaryDirectory() as tmpdir:
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 904, in __exit__
+    self.cleanup()
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 908, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 621, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 881, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 602, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\shutil.py", line 599, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+         ^^^^^^^^^^^^^^^^
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpk9_lyn8x\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\app.py", line 74, in <module>
+    df = cached_process_file(uploaded_file.getvalue(), uploaded_file.name, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 281, in __call__
+    return self._get_or_create_cached_value(args, kwargs, spinner_message)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 326, in _get_or_create_cached_value
+    return self._handle_cache_miss(cache, value_key, func_args, func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 385, in _handle_cache_miss
+    computed_value = self._info.func(*func_args, **func_kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\app.py", line 43, in cached_process_file
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 47, in process_nda_file
+    raise Exception(f"Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\\data\\'.")
+Exception: Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\data\'.
+
+[2026-03-10 14:42:04.859908] ERROR: 240030-2-8-2818574963.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 100, in read_ndax
+    data_df = read_ndc(data_file)
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 232, in read_ndc
+    return f(mm)
+           ^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 304, in _read_ndc_5_filetype_1
+    output.append(_bytes_to_list_ndc(i[0]))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 691, in _bytes_to_list_ndc
+    multiplier = multiplier_dict[Range]
+                 ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\shutil.py", line 619, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpo6pl7nwr\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 878, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpo6pl7nwr\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 43, in process_nda_file
+    df = NewareNDA.read(safe_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 51, in read
+    return read_ndax(file, software_cycle_number, cycle_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 37, in read_ndax
+    with tempfile.TemporaryDirectory() as tmpdir:
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 904, in __exit__
+    self.cleanup()
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 908, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 621, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 881, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 602, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\shutil.py", line 599, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+         ^^^^^^^^^^^^^^^^
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmpo6pl7nwr\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\app.py", line 74, in <module>
+    df = cached_process_file(uploaded_file.getvalue(), uploaded_file.name, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 281, in __call__
+    return self._get_or_create_cached_value(args, kwargs, spinner_message)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 326, in _get_or_create_cached_value
+    return self._handle_cache_miss(cache, value_key, func_args, func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 385, in _handle_cache_miss
+    computed_value = self._info.func(*func_args, **func_kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\app.py", line 43, in cached_process_file
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 47, in process_nda_file
+    raise Exception(f"Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\\data\\'.")
+Exception: Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\data\'.
+
+[2026-03-10 14:42:04.864154] USER FEEDBACK: Error parsing 240030-2-8-2818574963.ndax: Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\data'.
+[2026-03-10 14:44:20.483665] ERROR: 240030-2-8-2818574963.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 100, in read_ndax
+    data_df = read_ndc(data_file)
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 232, in read_ndc
+    return f(mm)
+           ^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 304, in _read_ndc_5_filetype_1
+    output.append(_bytes_to_list_ndc(i[0]))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 691, in _bytes_to_list_ndc
+    multiplier = multiplier_dict[Range]
+                 ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\shutil.py", line 619, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmp09kuf82l\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 878, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmp09kuf82l\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 48, in process_nda_file
+    df = NewareNDA.read(safe_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 51, in read
+    return read_ndax(file, software_cycle_number, cycle_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 37, in read_ndax
+    with tempfile.TemporaryDirectory() as tmpdir:
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 904, in __exit__
+    self.cleanup()
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 908, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 621, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 881, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 602, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\shutil.py", line 599, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+         ^^^^^^^^^^^^^^^^
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmp09kuf82l\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\app.py", line 74, in <module>
+    df = cached_process_file(uploaded_file.getvalue(), uploaded_file.name, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 281, in __call__
+    return self._get_or_create_cached_value(args, kwargs, spinner_message)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 326, in _get_or_create_cached_value
+    return self._handle_cache_miss(cache, value_key, func_args, func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 385, in _handle_cache_miss
+    computed_value = self._info.func(*func_args, **func_kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\app.py", line 43, in cached_process_file
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 52, in process_nda_file
+    raise Exception(f"Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\\data\\'.")
+Exception: Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\data\'.
+
+[2026-03-10 14:45:41.589557] ERROR: 240030-2-8-2818574963.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 100, in read_ndax
+    data_df = read_ndc(data_file)
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 232, in read_ndc
+    return f(mm)
+           ^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 304, in _read_ndc_5_filetype_1
+    output.append(_bytes_to_list_ndc(i[0]))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 691, in _bytes_to_list_ndc
+    multiplier = multiplier_dict[Range]
+                 ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\shutil.py", line 619, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmppnug9ola\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 878, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmppnug9ola\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 44, in process_nda_file
+    df = NewareNDA.read(safe_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 51, in read
+    return read_ndax(file, software_cycle_number, cycle_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 37, in read_ndax
+    with tempfile.TemporaryDirectory() as tmpdir:
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 904, in __exit__
+    self.cleanup()
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 908, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 621, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 881, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 602, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\shutil.py", line 599, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+         ^^^^^^^^^^^^^^^^
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmppnug9ola\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\app.py", line 74, in <module>
+    df = cached_process_file(uploaded_file.getvalue(), uploaded_file.name, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 281, in __call__
+    return self._get_or_create_cached_value(args, kwargs, spinner_message)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 326, in _get_or_create_cached_value
+    return self._handle_cache_miss(cache, value_key, func_args, func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 385, in _handle_cache_miss
+    computed_value = self._info.func(*func_args, **func_kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\app.py", line 43, in cached_process_file
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 48, in process_nda_file
+    raise Exception(f"Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\\data\\'.")
+Exception: Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\data\'.
+
+[2026-03-10 14:50:47.993212] ERROR: 240030-2-8-2818574963.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 100, in read_ndax
+    data_df = read_ndc(data_file)
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 232, in read_ndc
+    return f(mm)
+           ^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 304, in _read_ndc_5_filetype_1
+    output.append(_bytes_to_list_ndc(i[0]))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 691, in _bytes_to_list_ndc
+    multiplier = multiplier_dict[Range]
+                 ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\shutil.py", line 619, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmp659hfkgw\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 878, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmp659hfkgw\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 70, in process_nda_file
+    df = NewareNDA.read(safe_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 51, in read
+    return read_ndax(file, software_cycle_number, cycle_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 37, in read_ndax
+    with tempfile.TemporaryDirectory() as tmpdir:
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 904, in __exit__
+    self.cleanup()
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 908, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 621, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 881, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 602, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\shutil.py", line 599, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+         ^^^^^^^^^^^^^^^^
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\Users\\JA\\AppData\\Local\\Temp\\tmp659hfkgw\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\app.py", line 74, in <module>
+    df = cached_process_file(uploaded_file.getvalue(), uploaded_file.name, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 281, in __call__
+    return self._get_or_create_cached_value(args, kwargs, spinner_message)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 326, in _get_or_create_cached_value
+    return self._handle_cache_miss(cache, value_key, func_args, func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 385, in _handle_cache_miss
+    computed_value = self._info.func(*func_args, **func_kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\app.py", line 43, in cached_process_file
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 74, in process_nda_file
+    raise Exception(f"Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\\data\\'.")
+Exception: Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\data\'.
+
+[2026-03-10 14:52:22.027000] ERROR: C556_Cell 132_Asymmetric 80 SOC_29-1-4.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 100, in read_ndax
+    data_df = read_ndc(data_file)
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 232, in read_ndc
+    return f(mm)
+           ^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 304, in _read_ndc_5_filetype_1
+    output.append(_bytes_to_list_ndc(i[0]))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 691, in _bytes_to_list_ndc
+    multiplier = multiplier_dict[Range]
+                 ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\shutil.py", line 619, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\ndax_temp\\tmphsiypmmd\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 878, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\ndax_temp\\tmphsiypmmd\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 79, in process_nda_file
+    df = NewareNDA.read(safe_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 51, in read
+    return read_ndax(file, software_cycle_number, cycle_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 37, in read_ndax
+    with tempfile.TemporaryDirectory() as tmpdir:
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 904, in __exit__
+    self.cleanup()
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 908, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 621, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 881, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 602, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\shutil.py", line 599, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+         ^^^^^^^^^^^^^^^^
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\ndax_temp\\tmphsiypmmd\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\app.py", line 74, in <module>
+    df = cached_process_file(uploaded_file.getvalue(), uploaded_file.name, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 281, in __call__
+    return self._get_or_create_cached_value(args, kwargs, spinner_message)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 326, in _get_or_create_cached_value
+    return self._handle_cache_miss(cache, value_key, func_args, func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 385, in _handle_cache_miss
+    computed_value = self._info.func(*func_args, **func_kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\app.py", line 43, in cached_process_file
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 83, in process_nda_file
+    raise Exception(f"Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\\data\\'.")
+Exception: Hardware-level path error (WinError 267). This often happens when the NewareNDA library fails to extract internal files. Try moving your data to a simpler path like 'C:\data\'.
+
+[2026-03-10 15:21:11.093344] ERROR: C556_Cell 132_Asymmetric 80 SOC_29-1-4.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 100, in read_ndax
+    data_df = read_ndc(data_file)
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 232, in read_ndc
+    return f(mm)
+           ^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 304, in _read_ndc_5_filetype_1
+    output.append(_bytes_to_list_ndc(i[0]))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 691, in _bytes_to_list_ndc
+    multiplier = multiplier_dict[Range]
+                 ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\shutil.py", line 619, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\ndax_temp\\tmpfq03ciw_\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 878, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\ndax_temp\\tmpfq03ciw_\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 79, in process_nda_file
+    df = NewareNDA.read(safe_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 51, in read
+    return read_ndax(file, software_cycle_number, cycle_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 37, in read_ndax
+    with tempfile.TemporaryDirectory() as tmpdir:
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 904, in __exit__
+    self.cleanup()
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 908, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 621, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 881, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 602, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\shutil.py", line 599, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+         ^^^^^^^^^^^^^^^^
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\ndax_temp\\tmpfq03ciw_\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\app.py", line 76, in <module>
+    df = cached_process_file(uploaded_file.getvalue(), uploaded_file.name, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 281, in __call__
+    return self._get_or_create_cached_value(args, kwargs, spinner_message)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 326, in _get_or_create_cached_value
+    return self._handle_cache_miss(cache, value_key, func_args, func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 385, in _handle_cache_miss
+    computed_value = self._info.func(*func_args, **func_kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\app.py", line 45, in cached_process_file
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 83, in process_nda_file
+    raise Exception(f"Failed to parse {cell_label}. Original Error:\n{traceback.format_exc()}")
+Exception: Failed to parse C556_Cell 132_Asymmetric 80 SOC_29-1-4. Original Error:
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 100, in read_ndax
+    data_df = read_ndc(data_file)
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 232, in read_ndc
+    return f(mm)
+           ^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 304, in _read_ndc_5_filetype_1
+    output.append(_bytes_to_list_ndc(i[0]))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 691, in _bytes_to_list_ndc
+    multiplier = multiplier_dict[Range]
+                 ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\shutil.py", line 619, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\ndax_temp\\tmpfq03ciw_\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 878, in onerror
+    _os.unlink(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\ndax_temp\\tmpfq03ciw_\\data.ndc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 79, in process_nda_file
+    df = NewareNDA.read(safe_path)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDA.py", line 51, in read
+    return read_ndax(file, software_cycle_number, cycle_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\NewareNDA\NewareNDAx.py", line 37, in read_ndax
+    with tempfile.TemporaryDirectory() as tmpdir:
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 904, in __exit__
+    self.cleanup()
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 908, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 621, in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 881, in onerror
+    cls._rmtree(path, ignore_errors=ignore_errors)
+  File "C:\Program Files\Python311\Lib\tempfile.py", line 890, in _rmtree
+    _shutil.rmtree(name, onerror=onerror)
+  File "C:\Program Files\Python311\Lib\shutil.py", line 758, in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\Python311\Lib\shutil.py", line 602, in _rmtree_unsafe
+    onerror(os.scandir, path, sys.exc_info())
+  File "C:\Program Files\Python311\Lib\shutil.py", line 599, in _rmtree_unsafe
+    with os.scandir(path) as scandir_it:
+         ^^^^^^^^^^^^^^^^
+NotADirectoryError: [WinError 267] The directory name is invalid: 'C:\\ndax_temp\\tmpfq03ciw_\\data.ndc'
+
+
+[2026-03-10 18:15:11.946599] ERROR: C556_Cell 132_Asymmetric 80 SOC_29-1-4.ndax
+Traceback (most recent call last):
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\pandas\core\indexes\base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 191, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 234, in pandas._libs.index.IndexEngine._get_loc_duplicates
+  File "pandas/_libs/index.pyx", line 242, in pandas._libs.index.IndexEngine._maybe_get_bool_indexer
+  File "pandas/_libs/index.pyx", line 134, in pandas._libs.index._unpack_bool_indexer
+KeyError: 'Current_A'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\app.py", line 76, in <module>
+    df = cached_process_file(uploaded_file.getvalue(), uploaded_file.name, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 281, in __call__
+    return self._get_or_create_cached_value(args, kwargs, spinner_message)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 326, in _get_or_create_cached_value
+    return self._handle_cache_miss(cache, value_key, func_args, func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 385, in _handle_cache_miss
+    computed_value = self._info.func(*func_args, **func_kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\app.py", line 45, in cached_process_file
+    df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\logic_parsing.py", line 124, in process_nda_file
+    df['Current_mA'] = df['Current_A'] * 1000.0
+                       ~~^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\pandas\core\frame.py", line 4113, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\pandas\core\indexes\base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'Current_A'
+
+[2026-03-10 18:17:54.666585] ERROR: C556_Cell 132_Asymmetric 80 SOC_29-1-4.ndax
+Traceback (most recent call last):
+  File "c:\Users\JA\Documents\New folder\app.py", line 76, in <module>
+    df = cached_process_file(uploaded_file.getvalue(), uploaded_file.name, cell_label, mass_mg, theoretical_cap)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 281, in __call__
+    return self._get_or_create_cached_value(args, kwargs, spinner_message)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 326, in _get_or_create_cached_value
+    return self._handle_cache_miss(cache, value_key, func_args, func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\streamlit\runtime\caching\cache_utils.py", line 385, in _handle_cache_miss
+    computed_value = self._info.func(*func_args, **func_kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\app.py", line 48, in cached_process_file
+    df = map_crate(df, theoretical_cap, mass_mg)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JA\Documents\New folder\logic_electrochem.py", line 68, in map_crate
+    df['C_Rate'] = df.groupby(['Cycle', 'Step'])['Current_mA'].transform(lambda x: abs(x).mean()) / theoretical_capacity_ma
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\pandas\core\frame.py", line 9210, in groupby
+    return DataFrameGroupBy(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\pandas\core\groupby\groupby.py", line 1331, in __init__
+    grouper, exclusions, obj = get_grouper(
+                               ^^^^^^^^^^^^
+  File "C:\Users\JA\AppData\Roaming\Python\Python311\site-packages\pandas\core\groupby\grouper.py", line 1038, in get_grouper
+    raise ValueError(f"Grouper for '{name}' not 1-dimensional")
+ValueError: Grouper for 'Step' not 1-dimensional
+
+[2026-03-10 19:48:30.636180] USER FEEDBACK: 1.delete line in red circle since it not useable for analysis. This is why i said we need to cleaning or preprocessing data before use it
+
+2.we should let use decide to plot which cycle together for example >> check up cycle at 3rd, 105th, 510th cycle (just example)
+
+3.change active mass to g instead of mg
+
+[2026-03-10 20:27:25.420785] LOCAL LLM DIRECTIVE (Model=qwen, URL=http://localhost:11434): Change voltage vs capacity
+-> Image Reference Provided & Saved to: C:\Users\JA\Documents\New folder\Battery_Training_Data\template_20260310202725_1.png

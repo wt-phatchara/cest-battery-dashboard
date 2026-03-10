@@ -1,0 +1,22 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Data files (EXTREMELY IMPORTANT for your privacy/bandwidth)
+*.nda
+*.ndax
+*.csv
+data_temp/
+Battery_Training_Data/
+feedback.log
+
+# Virtual environments
+venv/
+env/
+.env
+
+# Streamlit/IDE
+.streamlit/
+.vscode/
+.idea/
