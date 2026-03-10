@@ -9,6 +9,23 @@ import uuid
 from datetime import datetime
 from logic_parsing import process_nda_file, clean_data  # pyre-ignore
 from logic_electrochem import calculate_dqdv, calculate_metrics, map_crate  # pyre-ignore
+import requests
+
+# --- GitHub Integration (Phase 7: Self-Development Loop) ---
+GITHUB_REPO = "wt-phatchara/cest-battery-dashboard"
+GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN", "")  # Add this to Streamlit Cloud Secrets
+
+def create_gh_issue(title, body):
+    if not GITHUB_TOKEN:
+        return False
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/issues"
+    headers = {
+        "Authorization": f"token {GITHUB_TOKEN}",
+        "Accept": "application/vnd.github.v3+json"
+    }
+    data = {"title": title, "body": body}
+    response = requests.post(url, headers=headers, json=data)
+    return response.status_code == 201
 
 # --- UI Configuration & Styling ---
 st.set_page_config(page_title="Battery Performance Auto-Plotter", layout="wide")
@@ -443,8 +460,20 @@ st.subheader("💡 Feedback & Feature Requests")
 user_feedback = st.text_area("Found a bug or want a new feature? Tell the Agent.")
 if st.button("Submit Feedback"):
     if user_feedback:
-        with open(FEEDBACK_FILE, "a") as f:
-            f.write(f"[{datetime.now()}] USER FEEDBACK: {user_feedback}\n")
-        st.success("Feedback logged! The Agent will review this in the next iteration.")
+        log_entry = f"[{datetime.now()}] USER FEEDBACK: {user_feedback}\n"
+        # 1. Local logging (if running on personal PC)
+        if not st.secrets.get("is_cloud"):
+            with open(FEEDBACK_FILE, "a") as f:
+                f.write(log_entry)
+        
+        # 2. Cloud Development (GitHub Issue)
+        success = create_gh_issue(f"Team Feedback: {datetime.now().strftime('%Y-%m-%d %H:%M')}", user_feedback)
+        
+        if success:
+            st.success("Feedback pushed to GitHub! The Self-Development Agent will review this shortly.")
+        else:
+            st.success("Feedback logged locally!")
+            if not GITHUB_TOKEN:
+                st.info("💡 Tip: Add 'GITHUB_TOKEN' to Streamlit Secrets to enable automatic Agent-Fixing.")
     else:
         st.warning("Please enter some feedback before submitting.")
