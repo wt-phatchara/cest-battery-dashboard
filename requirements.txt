@@ -4,3 +4,5 @@ numpy
 plotly
 scipy
 NewareNDA
+requests
+openpyxl
