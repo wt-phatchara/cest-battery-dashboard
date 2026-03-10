@@ -22,13 +22,16 @@ except Exception as e:
     print(f"!!! DEBUG v6.0 !!! Warning: Could not monkey-patch NewareNDA: {e}")
 # ------------------------------
 
-# GLOBAL OVERRIDE: Force all temp files into a short, space-free root path
-# This fixes internal NewareNDA extraction failures (WinError 267)
-SAFE_BASE = "C:\\ndax_temp"
-os.makedirs(SAFE_BASE, exist_ok=True)
-os.environ['TEMP'] = SAFE_BASE
-os.environ['TMP'] = SAFE_BASE
-tempfile.tempdir = SAFE_BASE
+# GLOBAL OVERRIDE: Use a local temp directory relative to the project
+# This fixes extraction issues while remaining cross-platform (Linux/Windows)
+SAFE_BASE = os.path.abspath(os.path.join(os.getcwd(), "data_temp"))
+try:
+    os.makedirs(SAFE_BASE, exist_ok=True)
+    os.environ['TEMP'] = SAFE_BASE
+    os.environ['TMP'] = SAFE_BASE
+    tempfile.tempdir = SAFE_BASE
+except Exception as e:
+    print(f"!!! DEBUG !!! Warning: Could not set custom temp dir: {e}")
 
 def get_short_path_name(long_name: str) -> str:
     """
