@@ -9,6 +9,10 @@ from datetime import datetime
 GITHUB_REPO = "wt-phatchara/cest-battery-dashboard"
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN", "")
 
+def log(msg):
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] 🤖 {msg}")
+
+# --- Token Check (Initial) ---
 if not GITHUB_TOKEN:
     print("\n" + "="*50)
     print("🔑 GITHUB TOKEN NOT FOUND")
@@ -20,12 +24,7 @@ if not GITHUB_TOKEN:
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
 MODEL_NAME = "deepseek-coder" # Best for coding tasks
-
-# Files the agent is allowed to touch
 CORE_FILES = ["streamlit_app.py", "logic_parsing.py", "logic_electrochem.py"]
-
-def log(msg):
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] 🤖 {msg}")
 
 def get_new_issues():
     """Fetches open issues from GitHub."""
@@ -38,8 +37,7 @@ def get_new_issues():
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
             return response.json()
-        else:
-            log(f"GitHub API Error: {response.status_code}")
+        log(f"GitHub API Error: {response.status_code}")
     except Exception as e:
         log(f"GitHub Poll Failed: {e}")
     return []
@@ -67,7 +65,7 @@ def ask_ollama(prompt):
         if response.status_code == 200:
             return response.json().get("response", "")
     except Exception as e:
-        log(f"Ollama Connection Failed: {e}. Is Ollama running?")
+        log(f"Ollama Connection Failed: {e}. Ensure Ollama is running!")
     return ""
 
 def apply_fix(issue_title, issue_body):
@@ -94,7 +92,6 @@ def apply_fix(issue_title, issue_body):
     {codebase}
 
     # INSTRUCTION
-    Analyze the request and provide the exact changes needed. 
     Return ONLY the full corrected content of the files that need changing. 
     Format your response as:
     --- START FILE: filename ---
@@ -137,11 +134,13 @@ def apply_fix(issue_title, issue_body):
 
 def main_loop():
     log("Checking GitHub Authentication...")
-    test_issues = get_new_issues()
-    if GITHUB_TOKEN:
-        log("✅ SUCCESS: System Linked to GitHub!")
-    
+    if not GITHUB_TOKEN:
+        log("No GITHUB_TOKEN active. Cannot poll GitHub.")
+        return
+        
+    log("✅ SUCCESS: System Linked to GitHub!")
     log("Autonomous Optimizer Started. Polling GitHub every 5 minutes...")
+    
     while True:
         issues = get_new_issues()
         if issues:
