@@ -14,7 +14,7 @@ import tempfile
 
 # Try-except imports to catch boot-time errors
 try:
-    from logic_parsing import process_nda_file, process_table_file, clean_data  # pyre-ignore
+    from logic_parsing import process_nda_file, process_table_file, clean_data, generate_template_xlsx  # pyre-ignore
     from logic_electrochem import calculate_dqdv, calculate_metrics, map_crate  # pyre-ignore
 except Exception as e:
     st.error(f"Boot Error: Core logic files missing or broken. {e}")
@@ -389,7 +389,23 @@ if all_data:
         
     with tab5:
         st.subheader("Raw Extracted Data")
-        st.caption("Showing limited preview of 1000 rows to prevent browser crash. Use Export below for full data.")
+        st.caption("Showing limited preview of 1000 rows. Use the button below to export the **FULL processed dataset** in the side-by-side template format.")
+        
+        # side-by-side conversion can be slow for very large files, so we generate on demand
+        if st.button("🚀 Prepare Full Export (.xlsx)"):
+             with st.spinner("Aligning cycles for template format..."):
+                 try:
+                     # generate_template_xlsx takes the filtered_df (which has dQ/dV already if calculated)
+                     xlsx_data = generate_template_xlsx(filtered_df, metrics_df=cycle_df)
+                     st.download_button(
+                         label="📥 Download Template-Aligned Excel",
+                         data=xlsx_data,
+                         file_name=f"Battery_Data_Export_{datetime.now().strftime('%Y%m%d_%H%M')}.xlsx",
+                         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                     )
+                 except Exception as e:
+                     st.error(f"Export Error: {str(e)}")
+        
         st.dataframe(filtered_df.head(1000), width="stretch", height=400)
 
     with tab6:

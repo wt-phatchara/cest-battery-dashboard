@@ -1,8 +1,9 @@
 import pandas as pd
-import numpy as np  # Added by user instruction
-import NewareNDA     # pyre-ignore
+import numpy as np
+import NewareNDA
 import os
 import shutil
+import io
 import uuid
 import tempfile
 import logging
@@ -303,3 +304,72 @@ def clean_data(df):
         df['Step'] = pd.to_numeric(df['Step'], errors='coerce').fillna(1).astype(int)
     
     return df
+
+def generate_template_xlsx(df, metrics_df=None):
+    """
+    Converts standardized battery data into the side-by-side XLSX format 
+    mimicking the user's Training.xlsx template.
+    """
+    output = io.BytesIO()
+    
+    with pd.ExcelWriter(output, engine='openpyxl') as writer:
+        # 1. Voltage vs Capacity Sheet (Side-by-Side Profile)
+        profile_data = []
+        cycles = sorted(df['Cycle Index'].unique())
+        
+        # We'll use Discharge phase for the main profile as per template commonality
+        profile_df = df[df['Step_Type'] == 'Discharge']
+        
+        cols = []
+        for cyc in cycles:
+            cyc_data = profile_df[profile_df['Cycle Index'] == cyc].copy()
+            if cyc_data.empty: continue
+            
+            # Format: Ah (Capacity / 1000) and V
+            cap_col = cyc_data['Capacity (mAh)'] / 1000.0
+            volt_col = cyc_data['Voltage (V)']
+            
+            # Create a localized dataframe for this cycle
+            temp = pd.DataFrame({
+                f"Cycle{cyc} (Ah)": cap_col.values,
+                f"Cycle{cyc} (V)": volt_col.values
+            })
+            cols.append(temp)
+
+        if cols:
+            final_profile = pd.concat(cols, axis=1)
+            final_profile.to_excel(writer, sheet_name='Voltage vs Capacity', index=False)
+            
+        # 2. dQ/dV vs Voltage Sheet
+        if 'dQ_dV' in df.columns:
+            dqdv_cols = []
+            for cyc in cycles:
+                cyc_data = df[(df['Cycle Index'] == cyc) & (df['dQ_dV'].notna())].copy()
+                if cyc_data.empty: continue
+                
+                temp = pd.DataFrame({
+                    f"Cycle{cyc} (V)": cyc_data['Voltage (V)'].values,
+                    f"Cycle{cyc} (dQ/dV)": cyc_data['dQ_dV'].values
+                })
+                dqdv_cols.append(temp)
+            
+            if dqdv_cols:
+                final_dqdv = pd.concat(dqdv_cols, axis=1)
+                final_dqdv.to_excel(writer, sheet_name='dQdV vs Voltage', index=False)
+
+        # 3. Summary Metrics Sheet
+        if metrics_df is not None:
+            metrics_df.to_excel(writer, sheet_name='Summary Metrics', index=False)
+        elif 'Coulombic Eff.' in df.columns:
+            summary = df[df['Step_Type'] == 'Discharge'].groupby('Cycle Index').agg({
+                'Specific Cap. (mAh/g)': 'max',
+                'Coulombic Eff.': 'first',
+                'Energy Eff.': 'first'
+            }).reset_index()
+            # Calculate Retention % relative to first cycle in the summary
+            if not summary.empty:
+                first_cap = summary['Specific Cap. (mAh/g)'].iloc[0]
+                summary['% Retention'] = (summary['Specific Cap. (mAh/g)'] / first_cap) * 100
+            summary.to_excel(writer, sheet_name='Summary Metrics', index=False)
+
+    return output.getvalue()
