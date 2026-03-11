@@ -14,7 +14,7 @@ import tempfile
 
 # Try-except imports to catch boot-time errors
 try:
-    from logic_parsing import process_nda_file, clean_data  # pyre-ignore
+    from logic_parsing import process_nda_file, process_table_file, clean_data  # pyre-ignore
     from logic_electrochem import calculate_dqdv, calculate_metrics, map_crate  # pyre-ignore
 except Exception as e:
     st.error(f"Boot Error: Core logic files missing or broken. {e}")
@@ -111,7 +111,6 @@ def cached_process_file(file_bytes, file_name, cell_label, mass_mg, theoretical_
         if extension in ['.nda', '.ndax']:
             df = process_nda_file(temp_path, cell_label, mass_g, theoretical_cap)
         else:
-            from logic_parsing import process_table_file
             df = process_table_file(temp_path, cell_label, mass_g, theoretical_cap)
             
         df = clean_data(df)
