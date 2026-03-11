@@ -111,7 +111,7 @@ def process_nda_file(file_path, cell_label, mass_g, theoretical_capacity):
     # Standardize column names (mapping NewareNDA output to our internal naming)
     # NewareNDA outputs different column names depending on file version:
     # E.g., 'Current(A)' vs 'Current(mA)', 'Charge_Capacity(mAh)' vs 'Capacity(Ah)'
-    # We will normalize to: ['Timestamp', 'Step', 'Cycle', 'Step_Type', 'Current_mA', 'Voltage_V', 'Capacity_mAh', 'Cell_Name']
+    # We will normalize to: ['Timestamp', 'Step', 'Cycle Index', 'Step_Type', 'Current (mA)', 'Voltage (V)', 'Capacity (mAh)', 'Cell_Name']
     
     # 1. Base Renaming Mapping
     # Prevent 2D DataFrames: NewareNDA sometimes outputs BOTH 'Step' and 'Step_Index'.
@@ -126,7 +126,8 @@ def process_nda_file(file_path, cell_label, mass_g, theoretical_capacity):
 
     rename_dict = {
         'Step_Index': 'Step',
-        'Cycle_Index': 'Cycle',
+        'Cycle_Index': 'Cycle Index',
+        'Cycle': 'Cycle Index'
     }
     df.rename(columns=rename_dict, inplace=True)
     
@@ -137,37 +138,37 @@ def process_nda_file(file_path, cell_label, mass_g, theoretical_capacity):
     # 2. Dynamic Unit Conversions
     # Voltage
     if 'Voltage(V)' in df.columns:
-        df['Voltage_V'] = df['Voltage(V)']
+        df['Voltage (V)'] = df['Voltage(V)']
     elif 'Voltage' in df.columns:
-         df['Voltage_V'] = df['Voltage']
+         df['Voltage (V)'] = df['Voltage']
 
     # Current (Normalize to mA)
     if 'Current(A)' in df.columns:
-        df['Current_mA'] = df['Current(A)'] * 1000.0
+        df['Current (mA)'] = df['Current(A)'] * 1000.0
     elif 'Current(mA)' in df.columns:
-        df['Current_mA'] = df['Current(mA)']
+        df['Current (mA)'] = df['Current(mA)']
         
     # Capacity (Normalize to mAh)
     # Some internal formats output a single Capacity column, others split it into Charge/Discharge
     if 'Capacity(Ah)' in df.columns:
-        df['Capacity_mAh'] = df['Capacity(Ah)'] * 1000.0
+        df['Capacity (mAh)'] = df['Capacity(Ah)'] * 1000.0
     elif 'Capacity(mAh)' in df.columns:
-        df['Capacity_mAh'] = df['Capacity(mAh)']
+        df['Capacity (mAh)'] = df['Capacity(mAh)']
     elif 'Charge_Capacity(mAh)' in df.columns and 'Discharge_Capacity(mAh)' in df.columns:
         # If separated, we can synthesize a single gross capacity column for plotting 
-        # (or just keep them separated depending on downstream logic, but app.py expects Capacity_mAh initially)
+        # (or just keep them separated depending on downstream logic, but app.py expects Capacity (mAh) initially)
         # We'll map the max of the two since typically only one is active per step
-        df['Capacity_mAh'] = df[['Charge_Capacity(mAh)', 'Discharge_Capacity(mAh)']].max(axis=1)
+        df['Capacity (mAh)'] = df[['Charge_Capacity(mAh)', 'Discharge_Capacity(mAh)']].max(axis=1)
     elif 'Charge_capacity' in df.columns and 'Discharge_capacity' in df.columns:
-        df['Capacity_mAh'] = df[['Charge_capacity', 'Discharge_capacity']].max(axis=1)
+        df['Capacity (mAh)'] = df[['Charge_capacity', 'Discharge_capacity']].max(axis=1)
         
     # Energy (Normalize to mWh)
     if 'Energy(Wh)' in df.columns:
-        df['Energy_mWh'] = df['Energy(Wh)'] * 1000.0
+        df['Energy (mWh)'] = df['Energy(Wh)'] * 1000.0
     elif 'Energy(mWh)' in df.columns:
-        df['Energy_mWh'] = df['Energy(mWh)']
+        df['Energy (mWh)'] = df['Energy(mWh)']
     elif 'Charge_Energy(mWh)' in df.columns and 'Discharge_Energy(mWh)' in df.columns:
-         df['Energy_mWh'] = df[['Charge_Energy(mWh)', 'Discharge_Energy(mWh)']].max(axis=1)
+         df['Energy (mWh)'] = df[['Charge_Energy(mWh)', 'Discharge_Energy(mWh)']].max(axis=1)
 
     # Normalize Step_Type for math logic (Charge/Discharge)
     # Neware types: 'CC_Chg', 'CC_DChg', 'CCCV_Chg', 'Rest', etc.
@@ -188,14 +189,14 @@ def process_nda_file(file_path, cell_label, mass_g, theoretical_capacity):
 def standardize_columns(df):
     """
     Attempts to map various column naming conventions to our internal standard.
-    Standard: ['Voltage_V', 'Current_mA', 'Capacity_mAh', 'Step', 'Cycle', 'Step_Type', 'Time']
+    Standard: ['Voltage (V)', 'Current (mA)', 'Capacity (mAh)', 'Step', 'Cycle Index', 'Step_Type', 'Time']
     """
     mapping = {
-        'Voltage_V': [r'volt', r'^v$', r'v_cell'],
-        'Current_mA': [r'curr', r'^i$', r'i_cell', r'amp'],
-        'Capacity_mAh': [r'cap', r'^q$', r'ah', r'mah'],
+        'Voltage (V)': [r'volt', r'^v$', r'v_cell'],
+        'Current (mA)': [r'curr', r'^i$', r'i_cell', r'amp'],
+        'Capacity (mAh)': [r'cap', r'^q$', r'ah', r'mah'],
         'Step': [r'step', r'status', r'state'],
-        'Cycle': [r'cyc', r'index'],
+        'Cycle Index': [r'cyc', r'index'],
         'Time': [r'time', r't_s', r'timestamp']
     }
     
@@ -215,30 +216,30 @@ def standardize_columns(df):
     df.rename(columns=found_cols, inplace=True)
     
     # Unit Normalization (Rough heuristics)
-    if 'Voltage_V' in df.columns:
+    if 'Voltage (V)' in df.columns:
         # If mean voltage is > 1000, it's likely mV
-        if df['Voltage_V'].mean() > 100:
-            df['Voltage_V'] = df['Voltage_V'] / 1000.0
+        if df['Voltage (V)'].mean() > 100:
+            df['Voltage (V)'] = df['Voltage (V)'] / 1000.0
             
-    if 'Current_mA' in df.columns:
+    if 'Current (mA)' in df.columns:
         # If values are extremely small, they might be Amps
-        if df['Current_mA'].abs().max() < 1:
-            df['Current_mA'] = df['Current_mA'] * 1000.0
+        if df['Current (mA)'].abs().max() < 1:
+            df['Current (mA)'] = df['Current (mA)'] * 1000.0
 
-    if 'Capacity_mAh' in df.columns:
+    if 'Capacity (mAh)' in df.columns:
         # If max cap is very small, might be Ah
-        if df['Capacity_mAh'].max() < 0.5:
-             df['Capacity_mAh'] = df['Capacity_mAh'] * 1000.0
+        if df['Capacity (mAh)'].max() < 0.5:
+             df['Capacity (mAh)'] = df['Capacity (mAh)'] * 1000.0
 
     if 'Step_Type' not in df.columns and 'Step' in df.columns:
         # Infer Charge/Discharge from Current if not provided
         df['Step_Type'] = 'Rest'
-        if 'Current_mA' in df.columns:
-            df.loc[df['Current_mA'] > 0.01, 'Step_Type'] = 'Charge'
-            df.loc[df['Current_mA'] < -0.01, 'Step_Type'] = 'Discharge'
+        if 'Current (mA)' in df.columns:
+            df.loc[df['Current (mA)'] > 0.01, 'Step_Type'] = 'Charge'
+            df.loc[df['Current (mA)'] < -0.01, 'Step_Type'] = 'Discharge'
 
     # Fallback for missing mandatory columns
-    if 'Cycle' not in df.columns: df['Cycle'] = 1
+    if 'Cycle Index' not in df.columns: df['Cycle Index'] = 1
     if 'Step' not in df.columns: df['Step'] = 1
     
     return df
@@ -269,11 +270,11 @@ def clean_data(df):
     General data cleaning: handles messy hardware noise.
     """
     # Remove NaN values in critical columns
-    critical_cols = ['Voltage_V', 'Cycle', 'Step']
+    critical_cols = ['Voltage (V)', 'Cycle Index', 'Step']
     df = df.dropna(subset=critical_cols)
     
     # Ensure types are correct
-    df['Cycle'] = df['Cycle'].astype(int)
+    df['Cycle Index'] = df['Cycle Index'].astype(int)
     df['Step'] = df['Step'].astype(int)
     
     return df

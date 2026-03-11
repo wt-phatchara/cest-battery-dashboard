@@ -27,21 +27,21 @@ def test_table_parsing():
         print(f"Mapped Columns: {df.columns.tolist()}")
         
         # 3. Assertions
-        assert 'Voltage_V' in df.columns
-        assert 'Current_mA' in df.columns
-        assert 'Capacity_mAh' in df.columns
-        assert 'Cycle' in df.columns
+        assert 'Voltage (V)' in df.columns
+        assert 'Current (mA)' in df.columns
+        assert 'Capacity (mAh)' in df.columns
+        assert 'Cycle Index' in df.columns
         assert 'Step' in df.columns
         
         # Check normalization (Ah to mAh)
         # 0.01 Ah should becomes 10 mAh
-        print(f"Capacity Sample: {df['Capacity_mAh'].iloc[0]}")
-        assert df['Capacity_mAh'].iloc[0] == 10.0
+        print(f"Capacity Sample: {df['Capacity (mAh)'].iloc[0]}")
+        assert df['Capacity (mAh)'].iloc[0] == 10.0
         
         # Check current (Amps to mA)
         # 0.1 Amps should become 100 mA
-        print(f"Current Sample: {df['Current_mA'].iloc[0]}")
-        assert df['Current_mA'].iloc[0] == 100.0
+        print(f"Current Sample: {df['Current (mA)'].iloc[0]}")
+        assert df['Current (mA)'].iloc[0] == 100.0
         
         print("--- Table Parsing Verification Passed! ---")
         

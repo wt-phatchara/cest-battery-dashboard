@@ -163,8 +163,8 @@ if all_data:
     cells = master_df['Cell_Name'].unique()
     selected_cells = st.sidebar.multiselect("Select Cells", cells, default=cells)
     
-    cycle_min = int(master_df['Cycle'].min())
-    cycle_max = int(master_df['Cycle'].max())
+    cycle_min = int(master_df['Cycle Index'].min())
+    cycle_max = int(master_df['Cycle Index'].max())
     cycle_range = st.sidebar.slider("Cycle Range Filter", cycle_min, cycle_max, (cycle_min, cycle_max))
     
     # Phase 5: Interactive click state
@@ -183,27 +183,27 @@ if all_data:
     if specific_cycles_input:
         try:
             custom_cycles = [int(c.strip()) for c in specific_cycles_input.split(',')]
-            filtered_df = master_df[(master_df['Cell_Name'].isin(selected_cells)) & (master_df['Cycle'].isin(custom_cycles))].copy()
+            filtered_df = master_df[(master_df['Cell_Name'].isin(selected_cells)) & (master_df['Cycle Index'].isin(custom_cycles))].copy()
         except:
-            filtered_df = master_df[(master_df['Cell_Name'].isin(selected_cells)) & (master_df['Cycle'].between(cycle_range[0], cycle_range[1]))].copy()
+            filtered_df = master_df[(master_df['Cell_Name'].isin(selected_cells)) & (master_df['Cycle Index'].between(cycle_range[0], cycle_range[1]))].copy()
     else:
-        filtered_df = master_df[(master_df['Cell_Name'].isin(selected_cells)) & (master_df['Cycle'].between(cycle_range[0], cycle_range[1]))].copy()
+        filtered_df = master_df[(master_df['Cell_Name'].isin(selected_cells)) & (master_df['Cycle Index'].between(cycle_range[0], cycle_range[1]))].copy()
     
     # Create Cycle_Step to explicitly separate disjointed continuous plotting lines (fixes zig-zag)
-    filtered_df['Cycle_Step'] = filtered_df['Cycle'].astype(str) + '_' + filtered_df['Step'].astype(str)
+    filtered_df['Cycle_Step'] = filtered_df['Cell_Name'] + "_" + filtered_df['Cycle Index'].astype(str) + '_' + filtered_df['Step'].astype(str)
     
     # --- Global Plotting Labels ---
     label_map = {
-        "Specific_Capacity_mAh_g": "Specific Capacity (mAh/g)",
-        "Capacity_mAh": "Capacity (mAh)",
-        "Voltage_V": "Voltage (V)",
-        "Current_mA": "Current (mA)",
-        "Cycle": "Cycle Number",
+        "Specific Cap. (mAh/g)": "Specific Capacity (mAh/g)",
+        "Capacity (mAh)": "Capacity (mAh)",
+        "Voltage (V)": "Voltage (V)",
+        "Current (mA)": "Current (mA)",
+        "Cycle Index": "Cycle Index",
         "Step": "Step Number",
         "Time": "Time (s)",
-        "Retention (%)": "Retention (%)",
-        "CE": "Coulombic Efficiency (%)",
-        "EE": "Energy Efficiency (%)",
+        "% Retention": "Retention (%)",
+        "Coulombic Eff.": "Coulombic Efficiency (%)",
+        "Energy Eff.": "Energy Efficiency (%)",
         "dV": "Voltage Differential (V)"
     }
 
@@ -222,8 +222,8 @@ if all_data:
         with st.form("tab1_form"):
             col1, col2, col3 = st.columns([2, 1, 1])
             with col1:
-                x_axis = st.selectbox("X-Axis", options=["Specific_Capacity_mAh_g", "Capacity_mAh", "Voltage_V", "Time", "Step"], index=0, key="tab1_x")
-                y_axis = st.selectbox("Y-Axis", options=["Voltage_V", "Specific_Capacity_mAh_g", "Capacity_mAh", "Current_mA"], index=0, key="tab1_y")
+                x_axis = st.selectbox("X-Axis", options=["Specific Cap. (mAh/g)", "Capacity (mAh)", "Voltage (V)", "Time", "Step"], index=0, key="tab1_x")
+                y_axis = st.selectbox("Y-Axis", options=["Voltage (V)", "Specific Cap. (mAh/g)", "Capacity (mAh)", "Current (mA)"], index=0, key="tab1_y")
             with col2:
                 x_min = st.number_input("X-Axis Min", value=None, key="tab1_xmin")
                 x_max = st.number_input("X-Axis Max", value=None, key="tab1_xmax")
@@ -254,8 +254,8 @@ if all_data:
         with st.form("tab2_form"):
             col1, col2, col3 = st.columns([2, 1, 1])
             with col1:
-                cycle_x = st.selectbox("X-Axis", options=["Cycle", "Time"], index=0, key="tab2_x")
-                cycle_y = st.selectbox("Y-Axis", options=["Retention (%)", "Coulombic Efficiency (%)", "Energy Efficiency (%)", "Specific Capacity (mAh/g)", "Capacity (mAh)", "Voltage Differential (V)"], index=0, key="tab2_y")
+                cycle_x = st.selectbox("X-Axis", options=["Cycle Index", "Time"], index=0, key="tab2_x")
+                cycle_y = st.selectbox("Y-Axis", options=["% Retention", "Coulombic Eff.", "Energy Eff.", "Specific Cap. (mAh/g)", "Capacity (mAh)", "dV"], index=0, key="tab2_y")
             with col2:
                 x_min2 = st.number_input("X-Axis Min", value=None, key="tab2_xmin")
                 x_max2 = st.number_input("X-Axis Max", value=None, key="tab2_xmax")
@@ -266,29 +266,20 @@ if all_data:
             submitted2 = st.form_submit_button("Update Plot")
         
         # Aggregate cycle data using mapped 'Discharge' phase
-        cycle_df = filtered_df[filtered_df['Phase'] == 'Discharge'].groupby(['Cell_Name', 'Cycle']).agg({
-            'Specific_Capacity_mAh_g': 'max',
-            'Capacity_mAh': 'max',
-            'CE': 'first',
-            'EE': 'first',
+        cycle_df = filtered_df[filtered_df['Phase'] == 'Discharge'].groupby(['Cell_Name', 'Cycle Index']).agg({
+            'Specific Cap. (mAh/g)': 'max',
+            'Capacity (mAh)': 'max',
+            'Coulombic Eff.': 'first',
+            'Energy Eff.': 'first',
             'dV': 'first',
             'Time': 'max'
         }).reset_index()
         
         # Must sort by cycle so Retention calculates accurately (nth / 1st * 100)
-        cycle_df = cycle_df.sort_values(['Cell_Name', 'Cycle'])
-        cycle_df['Retention (%)'] = cycle_df.groupby('Cell_Name')['Specific_Capacity_mAh_g'].transform(lambda x: (x / x.iloc[0]) * 100 if len(x) > 0 else np.nan)
+        cycle_df = cycle_df.sort_values(['Cell_Name', 'Cycle Index'])
+        cycle_df['% Retention'] = cycle_df.groupby('Cell_Name')['Specific Cap. (mAh/g)'].transform(lambda x: (x / x.iloc[0]) * 100 if len(x) > 0 else np.nan)
         
-        # Map nice string back to column name
-        y_col_map = {
-            "Retention (%)": "Retention (%)",
-            "Coulombic Efficiency (%)": "CE",
-            "Energy Efficiency (%)": "EE",
-            "Specific Capacity (mAh/g)": "Specific_Capacity_mAh_g",
-            "Capacity (mAh)": "Capacity_mAh",
-            "Voltage Differential (V)": "dV"
-        }
-        y_col = y_col_map[cycle_y]
+        y_col = cycle_y
         
         fig = px.line(cycle_df, x=cycle_x, y=y_col, color="Cell_Name", 
                      markers=True, title=f"<b>{cycle_y} vs. {label_map.get(cycle_x, cycle_x)}</b>", template="plotly_white",
@@ -307,8 +298,8 @@ if all_data:
         event = st.plotly_chart(fig, width="stretch", config=PLOT_CONFIG, on_select="rerun", selection_mode="points")
         if event and event.get("selection", {}).get("points"):
             clicked_point = event["selection"]["points"][0]
-            # If X-Axis is Cycle, grab the exact cycle number the user clicked
-            if cycle_x == "Cycle":
+            # If X-Axis is Cycle Index, grab the exact cycle number the user clicked
+            if cycle_x == "Cycle Index":
                 clicked_cycle = int(clicked_point["x"])
                 if st.session_state.selected_cycle != str(clicked_cycle):
                     st.session_state.selected_cycle = str(clicked_cycle)
@@ -319,7 +310,7 @@ if all_data:
         with st.form("tab3_form"):
             col1, col2, col3 = st.columns([2, 1, 1])
             with col1:
-                dqdv_x = st.selectbox("X-Axis", options=["Voltage_V", "Specific_Capacity_mAh_g", "Capacity_mAh"], index=0, key="tab3_x")
+                dqdv_x = st.selectbox("X-Axis", options=["Voltage (V)", "Specific Cap. (mAh/g)", "Capacity (mAh)"], index=0, key="tab3_x")
                 smoothing_window = st.slider("Smoothing Window (Savgol Filter)", 5, 51, 15, step=2)
             with col2:
                 x_min3 = st.number_input("X-Axis Min", value=None, key="tab3_xmin")
@@ -339,11 +330,11 @@ if all_data:
         
         if dqdv_list:
             dqdv_df = pd.concat(dqdv_list)
-            dqdv_df['Cycle_Step'] = dqdv_df['Cycle'].astype(str) + '_' + dqdv_df['Step'].astype(str)
+            dqdv_df['Cycle_Step'] = dqdv_df['Cell_Name'] + "_" + dqdv_df['Cycle Index'].astype(str) + '_' + dqdv_df['Step'].astype(str)
             fig = px.line(dqdv_df, x=dqdv_x, y="dQ_dV", color="Cell_Name", 
                          line_group="Cycle_Step", title=f"<b>dQ/dV vs. {label_map.get(dqdv_x, dqdv_x)}</b>",
                          template="plotly_white",
-                         labels={"dQ_dV": "dQ/dV", dqdv_x: label_map.get(dqdv_x, dqdv_x)})
+                         labels={"dQ_dV": "dQ/dV (mAh/g/V)", dqdv_x: label_map.get(dqdv_x, dqdv_x)})
             
             # Smart Default Crop for Outliers (if bounds not specifically set) - highly constrained based on generic template bounds
             y_range = [-15000, 15000]
@@ -365,7 +356,7 @@ if all_data:
         with st.form("tab4_form"):
             col1, col2, col3 = st.columns([2, 1, 1])
             with col1:
-                rate_metric = st.selectbox("Capacity Metric", ["Specific_Capacity_mAh_g", "Capacity_mAh"], index=0, key="tab4_metric")
+                rate_metric = st.selectbox("Capacity Metric", ["Specific Cap. (mAh/g)", "Capacity (mAh)"], index=0, key="tab4_metric")
             with col2:
                 x_min4 = st.number_input("X-Axis Min", value=None, key="tab4_xmin")
                 x_max4 = st.number_input("X-Axis Max", value=None, key="tab4_xmax")
@@ -375,8 +366,8 @@ if all_data:
                 
             submitted4 = st.form_submit_button("Update Plot")
             
-        rate_df = filtered_df[filtered_df['Phase'] == 'Discharge'].groupby(['Cell_Name', 'C_Rate', 'Cycle'])[rate_metric].max().reset_index()
-        fig = px.scatter(rate_df, x="Cycle", y=rate_metric, color="Cell_Name", 
+        rate_df = filtered_df[filtered_df['Phase'] == 'Discharge'].groupby(['Cell_Name', 'C_Rate', 'Cycle Index'])[rate_metric].max().reset_index()
+        fig = px.scatter(rate_df, x="Cycle Index", y=rate_metric, color="Cell_Name", 
                         size_max=10, title="<b>Rate Capability Analysis</b>", template="plotly_white",
                         labels={rate_metric: label_map.get(rate_metric, rate_metric)})
         fig.update_traces(marker={"size": 12, "symbol": "circle"}) # Make markers prominent like in training data
