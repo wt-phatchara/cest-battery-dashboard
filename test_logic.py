@@ -8,6 +8,7 @@ def test_math_logic():
     # Synthetic data: 1 cycle, linear capacity, sine voltage
     n_points = 100
     df = pd.DataFrame({
+        'Cell_Name': ['Test_Cell'] * n_points,
         'Cycle': [1] * n_points,
         'Step': [1] * n_points,
         'Step_Type': ['Charge'] * (n_points // 2) + ['Discharge'] * (n_points // 2),

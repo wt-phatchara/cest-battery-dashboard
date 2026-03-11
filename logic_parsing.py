@@ -185,6 +185,85 @@ def process_nda_file(file_path, cell_label, mass_g, theoretical_capacity):
     
     return df
 
+def standardize_columns(df):
+    """
+    Attempts to map various column naming conventions to our internal standard.
+    Standard: ['Voltage_V', 'Current_mA', 'Capacity_mAh', 'Step', 'Cycle', 'Step_Type', 'Time']
+    """
+    mapping = {
+        'Voltage_V': [r'volt', r'^v$', r'v_cell'],
+        'Current_mA': [r'curr', r'^i$', r'i_cell', r'amp'],
+        'Capacity_mAh': [r'cap', r'^q$', r'ah', r'mah'],
+        'Step': [r'step', r'status', r'state'],
+        'Cycle': [r'cyc', r'index'],
+        'Time': [r'time', r't_s', r'timestamp']
+    }
+    
+    found_cols = {}
+    remaining_cols = list(df.columns)
+    
+    import re
+    for std_name, patterns in mapping.items():
+        for p in patterns:
+            for col in remaining_cols:
+                if re.search(p, str(col), re.IGNORECASE):
+                    found_cols[col] = std_name
+                    remaining_cols.remove(col)
+                    break
+            if std_name in found_cols.values(): break
+            
+    df.rename(columns=found_cols, inplace=True)
+    
+    # Unit Normalization (Rough heuristics)
+    if 'Voltage_V' in df.columns:
+        # If mean voltage is > 1000, it's likely mV
+        if df['Voltage_V'].mean() > 100:
+            df['Voltage_V'] = df['Voltage_V'] / 1000.0
+            
+    if 'Current_mA' in df.columns:
+        # If values are extremely small, they might be Amps
+        if df['Current_mA'].abs().max() < 1:
+            df['Current_mA'] = df['Current_mA'] * 1000.0
+
+    if 'Capacity_mAh' in df.columns:
+        # If max cap is very small, might be Ah
+        if df['Capacity_mAh'].max() < 0.5:
+             df['Capacity_mAh'] = df['Capacity_mAh'] * 1000.0
+
+    if 'Step_Type' not in df.columns and 'Step' in df.columns:
+        # Infer Charge/Discharge from Current if not provided
+        df['Step_Type'] = 'Rest'
+        if 'Current_mA' in df.columns:
+            df.loc[df['Current_mA'] > 0.01, 'Step_Type'] = 'Charge'
+            df.loc[df['Current_mA'] < -0.01, 'Step_Type'] = 'Discharge'
+
+    # Fallback for missing mandatory columns
+    if 'Cycle' not in df.columns: df['Cycle'] = 1
+    if 'Step' not in df.columns: df['Step'] = 1
+    
+    return df
+
+def process_table_file(file_path, cell_label, mass_g, theoretical_capacity):
+    """
+    Reads a .csv or .xlsx file and standardizes it to our internal format.
+    """
+    extension = os.path.splitext(file_path)[1].lower()
+    
+    if extension == '.csv':
+        df = pd.read_csv(file_path)
+    else:
+        # Support both .xls and .xlsx
+        df = pd.read_excel(file_path)
+        
+    df = standardize_columns(df)
+    
+    # Metadata tagging
+    df['Cell_Name'] = cell_label
+    df['Mass_g'] = mass_g
+    df['Theoretical_Capacity_mAh_g'] = theoretical_capacity
+    
+    return df
+
 def clean_data(df):
     """
     General data cleaning: handles messy hardware noise.

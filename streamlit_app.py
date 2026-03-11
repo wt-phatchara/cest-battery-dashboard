@@ -10,6 +10,7 @@ import traceback
 import uuid
 from datetime import datetime
 import requests
+import tempfile
 
 # Try-except imports to catch boot-time errors
 try:
@@ -94,22 +95,29 @@ def cached_process_file(file_bytes, file_name, cell_label, mass_mg, theoretical_
     """
     Caches the parsing and math logic to avoid re-processing on every UI change.
     """
-    import tempfile
+    mass_g = mass_mg / 1000.0
     
     # 1. Ensure your local short-path temp directory exists
     temp_dir = os.path.join(os.getcwd(), "data_temp")
     os.makedirs(temp_dir, exist_ok=True)
 
-    # 2. Force Streamlit to extract the .ndax inside this local folder
-    with tempfile.NamedTemporaryFile(dir=temp_dir, delete=False, suffix=".ndax") as tmp:
+    # 2. Extract with correct extension
+    extension = os.path.splitext(file_name)[1].lower()
+    with tempfile.NamedTemporaryFile(dir=temp_dir, delete=False, suffix=extension) as tmp:
         tmp.write(file_bytes)
         temp_path = tmp.name
         
     try:
-        df = process_nda_file(temp_path, cell_label, mass_mg, theoretical_cap)
+        if extension in ['.nda', '.ndax']:
+            df = process_nda_file(temp_path, cell_label, mass_g, theoretical_cap)
+        else:
+            from logic_parsing import process_table_file
+            df = process_table_file(temp_path, cell_label, mass_g, theoretical_cap)
+            
         df = clean_data(df)
-        df = calculate_metrics(df, mass_mg)
-        df = map_crate(df, theoretical_cap, mass_mg)
+        df = calculate_metrics(df, mass_g)
+        df = map_crate(df, theoretical_cap, mass_g)
+        df = calculate_dqdv(df)
         return df
     finally:
         if os.path.exists(temp_path):
@@ -119,9 +127,9 @@ def cached_process_file(file_bytes, file_name, cell_label, mass_mg, theoretical_
 st.sidebar.markdown("**Built by P.W., CEST team**")
 st.sidebar.header("📂 Data Ingestion")
 uploaded_files = st.sidebar.file_uploader(
-    "Upload .nda or .ndax files", 
+    "Upload Battery Data (.nda, .ndax, .csv, .xlsx)", 
     accept_multiple_files=True, 
-    type=["nda", "ndax"]
+    type=["nda", "ndax", "csv", "xlsx"]
 )
 
 all_data = []
