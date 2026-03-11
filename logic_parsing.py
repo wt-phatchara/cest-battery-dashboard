@@ -1,4 +1,5 @@
-import pandas as pd  # pyre-ignore
+import pandas as pd
+import numpy as np  # Added by user instruction
 import NewareNDA     # pyre-ignore
 import os
 import shutil
@@ -196,7 +197,7 @@ def standardize_columns(df):
         'Current (mA)': [r'curr', r'^i$', r'i_cell', r'amp'],
         'Capacity (mAh)': [r'cap', r'^q$', r'ah', r'mah'],
         'Step': [r'step', r'status', r'state'],
-        'Cycle Index': [r'cyc', r'index'],
+        'Cycle Index': [r'cyc', r'index', r'cycle'],
         'Time': [r'time', r't_s', r'timestamp']
     }
     
@@ -217,18 +218,21 @@ def standardize_columns(df):
     
     # Unit Normalization (Rough heuristics)
     if 'Voltage (V)' in df.columns:
-        # If mean voltage is > 1000, it's likely mV
-        if df['Voltage (V)'].mean() > 100:
+        valid_v = df['Voltage (V)'].to_numpy(dtype=float)
+        # If mean voltage is > 100, it's likely mV
+        if np.nanmean(valid_v) > 100:
             df['Voltage (V)'] = df['Voltage (V)'] / 1000.0
             
     if 'Current (mA)' in df.columns:
+        valid_i = df['Current (mA)'].to_numpy(dtype=float)
         # If values are extremely small, they might be Amps
-        if df['Current (mA)'].abs().max() < 1:
+        if np.nanmax(np.abs(valid_i)) < 1:
             df['Current (mA)'] = df['Current (mA)'] * 1000.0
 
     if 'Capacity (mAh)' in df.columns:
+        valid_c = df['Capacity (mAh)'].to_numpy(dtype=float)
         # If max cap is very small, might be Ah
-        if df['Capacity (mAh)'].max() < 0.5:
+        if np.nanmax(valid_c) < 0.5:
              df['Capacity (mAh)'] = df['Capacity (mAh)'] * 1000.0
 
     if 'Step_Type' not in df.columns and 'Step' in df.columns:
@@ -238,24 +242,39 @@ def standardize_columns(df):
             df.loc[df['Current (mA)'] > 0.01, 'Step_Type'] = 'Charge'
             df.loc[df['Current (mA)'] < -0.01, 'Step_Type'] = 'Discharge'
 
-    # Fallback for missing mandatory columns
+    # Fallback for missing mandatory columns to prevent downstream crashes
     if 'Cycle Index' not in df.columns: df['Cycle Index'] = 1
     if 'Step' not in df.columns: df['Step'] = 1
+    if 'Voltage (V)' not in df.columns: df['Voltage (V)'] = np.nan
+    if 'Current (mA)' not in df.columns: df['Current (mA)'] = 0.0
+    if 'Capacity (mAh)' not in df.columns: df['Capacity (mAh)'] = 0.0
+    if 'Step_Type' not in df.columns: df['Step_Type'] = 'Rest'
     
     return df
 
 def process_table_file(file_path, cell_label, mass_g, theoretical_capacity):
     """
     Reads a .csv or .xlsx file and standardizes it to our internal format.
+    Handles complex multi-header templates like the provided Training.xlsx.
     """
     extension = os.path.splitext(file_path)[1].lower()
     
     if extension == '.csv':
         df = pd.read_csv(file_path)
     else:
-        # Support both .xls and .xlsx
-        df = pd.read_excel(file_path)
-        
+        # For Excel, we check if Row 0 contains 'Cycle' or useful headers.
+        # If it looks like Row 1 is the actual unit row (common in battery exports), we'll shift.
+        try:
+            # First peek at the first row
+            peek = pd.read_excel(file_path, nrows=1)
+            # If Row 0 is mostly 'Unnamed' or 'CycleX', the real units are in Row 1
+            if all('Unnamed' in str(c) or 'Cycle' in str(c) for c in peek.columns if not str(c).startswith('Unnamed')):
+                 df = pd.read_excel(file_path, header=1)
+            else:
+                 df = pd.read_excel(file_path)
+        except Exception:
+            df = pd.read_excel(file_path)
+            
     df = standardize_columns(df)
     
     # Metadata tagging
@@ -270,11 +289,17 @@ def clean_data(df):
     General data cleaning: handles messy hardware noise.
     """
     # Remove NaN values in critical columns
+    # First, only keep columns that actually exist in the dataframe to avoid KeyError
     critical_cols = ['Voltage (V)', 'Cycle Index', 'Step']
-    df = df.dropna(subset=critical_cols)
+    existing_critical = [c for c in critical_cols if c in df.columns]
     
-    # Ensure types are correct
-    df['Cycle Index'] = df['Cycle Index'].astype(int)
-    df['Step'] = df['Step'].astype(int)
+    if existing_critical:
+        df = df.dropna(subset=existing_critical)
+    
+    # Ensure types are correct for mandatory columns
+    if 'Cycle Index' in df.columns:
+        df['Cycle Index'] = pd.to_numeric(df['Cycle Index'], errors='coerce').fillna(1).astype(int)
+    if 'Step' in df.columns:
+        df['Step'] = pd.to_numeric(df['Step'], errors='coerce').fillna(1).astype(int)
     
     return df
